@@ -53,7 +53,6 @@ const JobPosts = () => {
   }, [totalCount]);
 
   useEffect(() => {
-    console.log(filter);
     let filteredList = jdList;
 
     if (filter?.roles?.length > 0) {
@@ -88,7 +87,6 @@ const JobPosts = () => {
         jd?.companyName?.toLowerCase().includes(filter?.name?.toLowerCase())
       );
     }
-    console.log(filteredList);
 
     setTempJDList(filteredList);
   }, [filter, jdList]);
