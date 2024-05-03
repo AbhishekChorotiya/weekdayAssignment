@@ -14,7 +14,7 @@ const jdSlice = createSlice({
     addJD: (state, action) => {
       state.jdList =
         state.jdList.length > 0
-          ? [state.jdList, ...action.payload]
+          ? [...state.jdList, ...action.payload]
           : action.payload;
       state.locations = [
         ...new Set([

@@ -21,16 +21,44 @@ const JobPosts = () => {
     name: null,
     locationType: null,
   });
+  const [fetching, setFetching] = useState(false);
+  let page = 0;
+
+  const handleInfiniteScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop >=
+        document.documentElement.offsetHeight &&
+      !fetching
+    ) {
+      const jobsData = async () => {
+        setFetching(true);
+        const data = await fetchJobs(page++);
+        if (!data) return;
+        dispatch(addJD(data?.jdList));
+        dispatch(updateTotalCount(data?.totalCount));
+        setFetching(false);
+      };
+      jobsData();
+    }
+  };
 
   useEffect(() => {
     const jobsData = async () => {
-      const data = await fetchJobs();
+      const data = await fetchJobs(page++);
       if (!data) return;
       dispatch(addJD(data?.jdList));
       setTempJDList(data?.jdList);
       dispatch(updateTotalCount(data?.totalCount));
+      if (window.innerHeight >= document.documentElement.offsetHeight) {
+        jobsData();
+      }
     };
     jobsData();
+
+    window.addEventListener("scroll", handleInfiniteScroll, {
+      passive: true,
+    });
+    return () => window.removeEventListener("scroll", handleInfiniteScroll);
   }, []);
 
   useEffect(() => {
@@ -52,7 +80,7 @@ const JobPosts = () => {
         (jd) => jd?.minJdSalary >= filter?.minPay
       );
     }
-    if (filter?.locationType) {
+    if (filter?.locationType?.length > 0) {
       filteredList = filteredList?.filter((jd) =>
         filter?.locationType?.includes(jd?.location.toLowerCase())
       );
@@ -72,7 +100,7 @@ const JobPosts = () => {
     console.log(filteredList);
 
     setTempJDList(filteredList);
-  }, [filter]);
+  }, [filter, jdList]);
 
   return (
     <div className={styles.container}>
