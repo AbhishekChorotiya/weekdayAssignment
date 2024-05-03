@@ -24,7 +24,7 @@ export const ROLES = [
     label: "PRODUCT",
     options: [
       {
-        label: "DESIGN",
+        label: "Design",
         value: "design",
       },
     ],
@@ -33,7 +33,7 @@ export const ROLES = [
     label: "SALES",
     options: [
       {
-        label: "MARKETING",
+        label: "Marketing",
         value: "marketing",
       },
     ],
@@ -50,8 +50,8 @@ export const LOCATION = [
     value: "hybrid",
   },
   {
-    label: "Onsite",
-    value: "onsite",
+    label: "In-Office",
+    value: "inoffice",
   },
 ];
 
@@ -66,4 +66,18 @@ export const EXPERIENCE = [
   { label: "8", value: "8" },
   { label: "9", value: "9" },
   { label: "10", value: "10" },
+];
+
+export const PAY = [
+  { label: "0", value: "0" },
+  { label: "5L", value: "5" },
+  { label: "10L", value: "10" },
+  { label: "15L", value: "15" },
+  { label: "20L", value: "20" },
+  { label: "25L", value: "25" },
+  { label: "30L", value: "30" },
+  { label: "40L", value: "40" },
+  { label: "50L", value: "50" },
+  { label: "60L", value: "60" },
+  { label: "70L", value: "70" },
 ];

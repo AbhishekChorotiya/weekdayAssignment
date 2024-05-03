@@ -1,30 +1,78 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./jobpost.module.css";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import { EXPERIENCE, LOCATION, ROLES } from "../utils/constants/filters";
+import { EXPERIENCE, LOCATION, PAY, ROLES } from "../utils/constants/filters";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addJD,
-  fetchJobsData,
-  filterByExperience,
-  updateTotalCount,
-} from "../redux/store";
+import { addJD, updateTotalCount } from "../redux/store";
 import { fetchJobs } from "../utils/apis/fetchJobs";
 const animatedComponents = makeAnimated();
 
 const JobPosts = () => {
   const dispatch = useDispatch();
   const jdList = useSelector((state) => state.jdList);
+  const locations = useSelector((state) => state.locations);
+  const [tempJDList, setTempJDList] = useState([]);
+  const [filter, setFilter] = useState({
+    roles: [],
+    location: [],
+    experience: null,
+    minPay: null,
+    name: null,
+    locationType: null,
+  });
+
   useEffect(() => {
     const jobsData = async () => {
       const data = await fetchJobs();
       if (!data) return;
       dispatch(addJD(data?.jdList));
+      setTempJDList(data?.jdList);
       dispatch(updateTotalCount(data?.totalCount));
     };
     jobsData();
   }, []);
+
+  useEffect(() => {
+    console.log(filter);
+    let filteredList = jdList;
+
+    if (filter?.roles?.length > 0) {
+      filteredList = filteredList?.filter((jd) =>
+        filter?.roles?.includes(jd?.jobRole)
+      );
+    }
+    if (filter?.experience) {
+      filteredList = filteredList?.filter(
+        (jd) => jd?.minExp <= filter?.experience
+      );
+    }
+    if (filter?.minPay) {
+      filteredList = filteredList?.filter(
+        (jd) => jd?.minJdSalary >= filter?.minPay
+      );
+    }
+    if (filter?.locationType) {
+      filteredList = filteredList?.filter((jd) =>
+        filter?.locationType?.includes(jd?.location.toLowerCase())
+      );
+    }
+
+    if (filter?.location?.length > 0) {
+      filteredList = filteredList?.filter((jd) =>
+        filter?.location?.includes(jd?.location.toUpperCase())
+      );
+    }
+
+    if (filter?.name) {
+      filteredList = filteredList?.filter((jd) =>
+        jd?.companyName?.toLowerCase().includes(filter?.name?.toLowerCase())
+      );
+    }
+    console.log(filteredList);
+
+    setTempJDList(filteredList);
+  }, [filter]);
 
   return (
     <div className={styles.container}>
@@ -37,6 +85,9 @@ const JobPosts = () => {
           className={styles.select}
           classNamePrefix="select"
           placeholder="Role"
+          onChange={(data) =>
+            setFilter({ ...filter, roles: data.map((e) => e.value) })
+          }
         />
 
         <Select
@@ -46,18 +97,22 @@ const JobPosts = () => {
           className={styles.select}
           classNamePrefix="select"
           placeholder="Experience"
-          onChange={(e) => {
-            dispatch(filterByExperience(e.value));
-          }}
+          onChange={(data) => setFilter({ ...filter, experience: data.value })}
         />
         <Select
           closeMenuOnSelect={false}
           components={animatedComponents}
           isMulti
-          options={ROLES}
+          options={locations.map((location) => ({
+            label: location,
+            value: location,
+          }))}
           className={styles.select}
           classNamePrefix="select"
           placeholder="Location"
+          onChange={(data) =>
+            setFilter({ ...filter, location: data.map((e) => e.value) })
+          }
         />
 
         <Select
@@ -68,6 +123,9 @@ const JobPosts = () => {
           className={styles.select}
           classNamePrefix="select"
           placeholder="Remote"
+          onChange={(data) =>
+            setFilter({ ...filter, locationType: data.map((e) => e.value) })
+          }
         />
 
         <Select
@@ -82,20 +140,48 @@ const JobPosts = () => {
         <Select
           closeMenuOnSelect={false}
           components={animatedComponents}
-          isMulti
-          options={ROLES}
+          options={PAY}
           className={styles.select}
           classNamePrefix="select"
           placeholder="Min Base Pay"
+          onChange={(data) => setFilter({ ...filter, minPay: data.value })}
         />
         <input
           type="text"
           placeholder="Company Name"
           className={styles.input}
+          onChange={(e) => setFilter({ ...filter, name: e.target.value })}
         />
       </div>
-      {jdList.map((jd, i) => (
-        <span key={i}>{jd.minExp}</span>
+      {tempJDList.map((jd, i) => (
+        <div
+          key={i}
+          style={{
+            display: "flex",
+            gap: "1rem",
+            borderBottom: "1px solid black",
+            marginTop: "1rem",
+          }}
+        >
+          <span style={{ width: "150px", display: "flex", flexWrap: "wrap" }}>
+            {jd.companyName}
+          </span>
+          <span style={{ width: "150px", display: "flex", flexWrap: "wrap" }}>
+            {jd.jobRole}
+          </span>
+          <span style={{ width: "150px", display: "flex", flexWrap: "wrap" }}>
+            {jd.location}
+          </span>
+          <span style={{ width: "150px", display: "flex", flexWrap: "wrap" }}>
+            {jd.minExp}
+          </span>
+          <span style={{ width: "150px", display: "flex", flexWrap: "wrap" }}>
+            ${jd.maxJdSalary}
+          </span>
+          <span style={{ width: "150px", display: "flex", flexWrap: "wrap" }}>
+            currency {jd.salaryCurrencyCode}
+          </span>
+        </div>
       ))}
     </div>
   );

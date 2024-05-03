@@ -3,6 +3,7 @@ import { fetchJobs } from "../utils/apis/fetchJobs";
 
 const initialState = {
   jdList: [],
+  locations: [],
   totalCount: 0,
 };
 
@@ -11,14 +12,26 @@ const jdSlice = createSlice({
   initialState,
   reducers: {
     addJD: (state, action) => {
-      state.jdList = action.payload;
+      state.jdList =
+        state.jdList.length > 0
+          ? [state.jdList, ...action.payload]
+          : action.payload;
+      state.locations = [
+        ...new Set([
+          ...state.locations,
+          ...action.payload
+            .map((jd) => jd.location.toUpperCase())
+            .filter(
+              (location) =>
+                location !== "REMOTE" &&
+                location !== "HYBRID" &&
+                location !== "ONSITE"
+            ),
+        ]),
+      ];
     },
     updateTotalCount: (state, action) => {
       state.totalCount = action.payload;
-    },
-    filterByExperience: (state, action) => {
-      console.log(action.payload);
-      state.jdList = state.jdList.filter((jd) => jd.minExp === action.payload);
     },
   },
 });
