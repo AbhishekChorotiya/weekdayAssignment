@@ -29,7 +29,7 @@ const JobPosts = () => {
   const handleInfiniteScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop >=
-      document.documentElement.offsetHeight - 10
+      document.documentElement.offsetHeight - 5
     ) {
       jobsData();
     }
