@@ -81,3 +81,12 @@ export const PAY = [
   { label: "60L", value: "60" },
   { label: "70L", value: "70" },
 ];
+
+export const DEFAULT_FILTER_STATE = {
+  roles: [],
+  experience: null,
+  minPay: null,
+  locationType: [],
+  location: [],
+  name: "",
+};

@@ -1,5 +1,4 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-import { fetchJobs } from "../utils/apis/fetchJobs";
 
 const initialState = {
   jdList: [],

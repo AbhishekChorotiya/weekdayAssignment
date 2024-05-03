@@ -1,5 +1,6 @@
 var fetching = false;
 export const fetchJobs = async (page = 0) => {
+  console.log(page);
   if (fetching) return;
   fetching = true;
   try {

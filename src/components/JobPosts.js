@@ -2,28 +2,26 @@ import React, { useEffect, useState } from "react";
 import styles from "./jobpost.module.css";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import { EXPERIENCE, LOCATION, PAY, ROLES } from "../utils/constants/filters";
+import {
+  DEFAULT_FILTER_STATE,
+  EXPERIENCE,
+  LOCATION,
+  PAY,
+  ROLES,
+} from "../utils/constants/filters";
 import { useSelector, useDispatch } from "react-redux";
 import { addJD, updateTotalCount } from "../redux/store";
 import { fetchJobs } from "../utils/apis/fetchJobs";
 import JobCard from "./JobCard";
+import { filterData } from "../utils/helpers";
 const animatedComponents = makeAnimated();
 
 const JobPosts = () => {
   const dispatch = useDispatch();
   const jdList = useSelector((state) => state.jdList);
-  const totalCount = useSelector((state) => state.totalCount);
   const locations = useSelector((state) => state.locations);
   const [tempJDList, setTempJDList] = useState([]);
-  const [filter, setFilter] = useState({
-    roles: [],
-    location: [],
-    experience: null,
-    minPay: null,
-    name: null,
-    locationType: null,
-  });
-  const [fetching, setFetching] = useState(false);
+  const [filter, setFilter] = useState(DEFAULT_FILTER_STATE);
   let page = 0;
 
   const handleInfiniteScroll = () => {
@@ -36,59 +34,31 @@ const JobPosts = () => {
   };
 
   const jobsData = async () => {
-    const data = await fetchJobs(page++);
-    if (!data) return;
-    dispatch(addJD(data?.jdList));
-    setTempJDList(data?.jdList);
-    dispatch(updateTotalCount(data?.totalCount));
+    try {
+      const data = await fetchJobs(page++);
+      if (!data) return;
+      dispatch(addJD(data?.jdList));
+      setTempJDList(data?.jdList);
+      dispatch(updateTotalCount(data?.totalCount));
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   useEffect(() => {
-    jobsData();
-
     window.addEventListener("scroll", handleInfiniteScroll, {
       passive: true,
     });
     return () => window.removeEventListener("scroll", handleInfiniteScroll);
-  }, [totalCount]);
+  }, []);
 
   useEffect(() => {
-    let filteredList = jdList;
+    jobsData();
+  }, []);
 
-    if (filter?.roles?.length > 0) {
-      filteredList = filteredList?.filter((jd) =>
-        filter?.roles?.includes(jd?.jobRole)
-      );
-    }
-    if (filter?.experience) {
-      filteredList = filteredList?.filter(
-        (jd) => jd?.minExp <= filter?.experience
-      );
-    }
-    if (filter?.minPay) {
-      filteredList = filteredList?.filter(
-        (jd) => jd?.minJdSalary >= filter?.minPay
-      );
-    }
-    if (filter?.locationType?.length > 0) {
-      filteredList = filteredList?.filter((jd) =>
-        filter?.locationType?.includes(jd?.location.toLowerCase())
-      );
-    }
-
-    if (filter?.location?.length > 0) {
-      filteredList = filteredList?.filter((jd) =>
-        filter?.location?.includes(jd?.location.toUpperCase())
-      );
-    }
-
-    if (filter?.name) {
-      filteredList = filteredList?.filter((jd) =>
-        jd?.companyName?.toLowerCase().includes(filter?.name?.toLowerCase())
-      );
-    }
-
-    setTempJDList(filteredList);
+  useEffect(() => {
+    const filteredData = filterData(filter, jdList);
+    setTempJDList(filteredData);
   }, [filter, jdList]);
 
   return (
