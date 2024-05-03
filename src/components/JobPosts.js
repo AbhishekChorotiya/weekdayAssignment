@@ -37,10 +37,7 @@ const JobPosts = () => {
 
   const jobsData = async () => {
     const data = await fetchJobs(page++);
-    if (!data) {
-      setFetching(false);
-      return;
-    }
+    if (!data) return;
     dispatch(addJD(data?.jdList));
     setTempJDList(data?.jdList);
     dispatch(updateTotalCount(data?.totalCount));
@@ -119,7 +116,10 @@ const JobPosts = () => {
           className={styles.select}
           classNamePrefix="select"
           placeholder="Experience"
-          onChange={(data) => setFilter({ ...filter, experience: data.value })}
+          isClearable={true}
+          onChange={(data) =>
+            setFilter({ ...filter, experience: data?.value || null })
+          }
         />
         <Select
           closeMenuOnSelect={false}

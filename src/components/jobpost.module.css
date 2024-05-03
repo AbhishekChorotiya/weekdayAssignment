@@ -19,10 +19,12 @@
     font-size: 12px;
 }
 
+
+
 .input{
     min-width: 160px;
     font-size: 12px;
-    height: 2rem;
+    height: 2.4rem;
     padding-left: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -121,3 +123,18 @@
     text-decoration: none;
     color: black;
 }
+
+@media screen and (max-width: 420px) {
+    .filters{
+        flex-direction: row;
+    }
+    .select{
+        min-width: 100%;
+    }
+    .input{
+        min-width: 100%;
+    }
+    .container{
+        padding: 1.2rem;
+    }
+  }
