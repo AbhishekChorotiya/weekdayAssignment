@@ -1,10 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
+import JobPosts from "./components/JobPosts";
+const animatedComponents = makeAnimated();
 function App() {
   return (
-    <div className="App">
-      Abhishek Chorotiya
+    <div className="main">
+      <JobPosts />
     </div>
   );
 }
