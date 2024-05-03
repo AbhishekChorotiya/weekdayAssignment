@@ -1,12 +1,13 @@
-import Select from "react-select";
-import makeAnimated from "react-select/animated";
 import JobPosts from "./components/JobPosts";
-const animatedComponents = makeAnimated();
+import { Provider } from "react-redux";
+import store from "./redux/store";
 function App() {
   return (
-    <div className="main">
-      <JobPosts />
-    </div>
+    <Provider store={store}>
+      <div className="main">
+        <JobPosts />
+      </div>
+    </Provider>
   );
 }
 
