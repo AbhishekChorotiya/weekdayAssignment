@@ -6,11 +6,13 @@ import { EXPERIENCE, LOCATION, PAY, ROLES } from "../utils/constants/filters";
 import { useSelector, useDispatch } from "react-redux";
 import { addJD, updateTotalCount } from "../redux/store";
 import { fetchJobs } from "../utils/apis/fetchJobs";
+import JobCard from "./JobCard";
 const animatedComponents = makeAnimated();
 
 const JobPosts = () => {
   const dispatch = useDispatch();
   const jdList = useSelector((state) => state.jdList);
+  const totalCount = useSelector((state) => state.totalCount);
   const locations = useSelector((state) => state.locations);
   const [tempJDList, setTempJDList] = useState([]);
   const [filter, setFilter] = useState({
@@ -27,39 +29,31 @@ const JobPosts = () => {
   const handleInfiniteScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop >=
-        document.documentElement.offsetHeight &&
-      !fetching
+      document.documentElement.offsetHeight - 10
     ) {
-      const jobsData = async () => {
-        setFetching(true);
-        const data = await fetchJobs(page++);
-        if (!data) return;
-        dispatch(addJD(data?.jdList));
-        dispatch(updateTotalCount(data?.totalCount));
-        setFetching(false);
-      };
       jobsData();
     }
   };
 
+  const jobsData = async () => {
+    const data = await fetchJobs(page++);
+    if (!data) {
+      setFetching(false);
+      return;
+    }
+    dispatch(addJD(data?.jdList));
+    setTempJDList(data?.jdList);
+    dispatch(updateTotalCount(data?.totalCount));
+  };
+
   useEffect(() => {
-    const jobsData = async () => {
-      const data = await fetchJobs(page++);
-      if (!data) return;
-      dispatch(addJD(data?.jdList));
-      setTempJDList(data?.jdList);
-      dispatch(updateTotalCount(data?.totalCount));
-      if (window.innerHeight >= document.documentElement.offsetHeight) {
-        jobsData();
-      }
-    };
     jobsData();
 
     window.addEventListener("scroll", handleInfiniteScroll, {
       passive: true,
     });
     return () => window.removeEventListener("scroll", handleInfiniteScroll);
-  }, []);
+  }, [totalCount]);
 
   useEffect(() => {
     console.log(filter);
@@ -162,6 +156,7 @@ const JobPosts = () => {
           isMulti
           options={ROLES}
           className={styles.select}
+          isDisabled={true}
           classNamePrefix="select"
           placeholder="Tech Stack"
         />
@@ -181,36 +176,26 @@ const JobPosts = () => {
           onChange={(e) => setFilter({ ...filter, name: e.target.value })}
         />
       </div>
-      {tempJDList.map((jd, i) => (
-        <div
-          key={i}
-          style={{
-            display: "flex",
-            gap: "1rem",
-            borderBottom: "1px solid black",
-            marginTop: "1rem",
-          }}
-        >
-          <span style={{ width: "150px", display: "flex", flexWrap: "wrap" }}>
-            {jd.companyName}
-          </span>
-          <span style={{ width: "150px", display: "flex", flexWrap: "wrap" }}>
-            {jd.jobRole}
-          </span>
-          <span style={{ width: "150px", display: "flex", flexWrap: "wrap" }}>
-            {jd.location}
-          </span>
-          <span style={{ width: "150px", display: "flex", flexWrap: "wrap" }}>
-            {jd.minExp}
-          </span>
-          <span style={{ width: "150px", display: "flex", flexWrap: "wrap" }}>
-            ${jd.maxJdSalary}
-          </span>
-          <span style={{ width: "150px", display: "flex", flexWrap: "wrap" }}>
-            currency {jd.salaryCurrencyCode}
-          </span>
-        </div>
-      ))}
+
+      <div className={styles.jobs}>
+        {tempJDList?.length > 0 ? (
+          tempJDList?.map((jd, i) => (
+            <JobCard
+              key={i}
+              name={jd?.companyName}
+              role={jd?.jobRole}
+              experience={jd?.minExp}
+              location={jd?.location}
+              details={jd?.jobDetailsFromCompany}
+              salary={jd?.minJdSalary}
+              logo={jd?.logoUrl}
+              jdLink={jd?.jdLink}
+            />
+          ))
+        ) : (
+          <p>No Jobs Found</p>
+        )}
+      </div>
     </div>
   );
 };
