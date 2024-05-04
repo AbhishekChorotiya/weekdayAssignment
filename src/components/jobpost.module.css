@@ -3,11 +3,12 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 2rem;
+    padding: 1rem;
 }
 
 .filters{
     display: flex;
+    min-height: 100%;
     width: 100%;
     gap: 0.4rem;
     flex-wrap: wrap;
@@ -122,6 +123,20 @@
     font-size: 1rem;
     text-decoration: none;
     color: black;
+}
+
+.inputWarpper{
+    display: flex;
+    position: relative;
+    margin-top: 1.5rem;
+}
+
+.label{
+position: absolute;
+top: -1rem;
+left: 0.4rem;
+font-size: 12px;
+font-weight: bold;
 }
 
 @media screen and (max-width: 420px) {

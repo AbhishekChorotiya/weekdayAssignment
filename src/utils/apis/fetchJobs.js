@@ -1,5 +1,6 @@
 var fetching = false;
-export const fetchJobs = async (page = 0) => {
+var page = 0;
+export const fetchJobs = async () => {
   console.log(page);
   if (fetching) return;
   fetching = true;
@@ -8,7 +9,7 @@ export const fetchJobs = async (page = 0) => {
     myHeaders.append("Content-Type", "application/json");
     const body = JSON.stringify({
       limit: 10,
-      offset: page * 10,
+      offset: page++ * 10,
     });
 
     const requestOptions = {

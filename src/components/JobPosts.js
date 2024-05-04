@@ -19,10 +19,11 @@ const animatedComponents = makeAnimated();
 const JobPosts = () => {
   const dispatch = useDispatch();
   const jdList = useSelector((state) => state.jdList);
+  const totalCount = useSelector((state) => state.totalCount);
   const locations = useSelector((state) => state.locations);
   const [tempJDList, setTempJDList] = useState([]);
   const [filter, setFilter] = useState(DEFAULT_FILTER_STATE);
-  let page = 0;
+  const [loading, setLoading] = useState(false);
 
   const handleInfiniteScroll = () => {
     if (
@@ -35,7 +36,7 @@ const JobPosts = () => {
 
   const jobsData = async () => {
     try {
-      const data = await fetchJobs(page++);
+      const data = await fetchJobs();
       if (!data) return;
       dispatch(addJD(data?.jdList));
       setTempJDList(data?.jdList);
@@ -50,7 +51,7 @@ const JobPosts = () => {
       passive: true,
     });
     return () => window.removeEventListener("scroll", handleInfiniteScroll);
-  }, []);
+  }, [totalCount]);
 
   useEffect(() => {
     jobsData();
@@ -64,85 +65,133 @@ const JobPosts = () => {
   return (
     <div className={styles.container}>
       <div className={styles.filters}>
-        <Select
-          closeMenuOnSelect={false}
-          components={animatedComponents}
-          isMulti
-          options={ROLES}
-          className={styles.select}
-          classNamePrefix="select"
-          placeholder="Role"
-          onChange={(data) =>
-            setFilter({ ...filter, roles: data.map((e) => e.value) })
-          }
-        />
+        <div className={styles.inputWarpper}>
+          {filter?.roles?.length > 0 && (
+            <label htmlFor="role" className={styles.label}>
+              Role
+            </label>
+          )}
+          <Select
+            closeMenuOnSelect={false}
+            inputId="role"
+            components={animatedComponents}
+            isMulti
+            options={ROLES}
+            className={styles.select}
+            classNamePrefix="select"
+            placeholder="Role"
+            onChange={(data) =>
+              setFilter({ ...filter, roles: data.map((e) => e.value) })
+            }
+          />
+        </div>
+        <div className={styles.inputWarpper}>
+          {filter?.experience && (
+            <label htmlFor="experience" className={styles.label}>
+              Experience
+            </label>
+          )}
+          <Select
+            inputId="experience"
+            closeMenuOnSelect={false}
+            components={animatedComponents}
+            options={EXPERIENCE}
+            className={styles.select}
+            classNamePrefix="select"
+            placeholder="Experience"
+            isClearable={true}
+            onChange={(data) =>
+              setFilter({ ...filter, experience: data?.value || null })
+            }
+          />
+        </div>
+        <div className={styles.inputWarpper}>
+          {filter?.location?.length > 0 && (
+            <label htmlFor="location" className={styles.label}>
+              Location
+            </label>
+          )}
+          <Select
+            inputId="location"
+            closeMenuOnSelect={false}
+            components={animatedComponents}
+            isMulti
+            options={locations.map((location) => ({
+              label: location,
+              value: location,
+            }))}
+            className={styles.select}
+            classNamePrefix="select"
+            placeholder="Location"
+            onChange={(data) =>
+              setFilter({ ...filter, location: data.map((e) => e.value) })
+            }
+          />
+        </div>
+        <div className={styles.inputWarpper}>
+          {filter?.locationType?.length > 0 && (
+            <label htmlFor="locationType" className={styles.label}>
+              Work Mode
+            </label>
+          )}
 
-        <Select
-          closeMenuOnSelect={false}
-          components={animatedComponents}
-          options={EXPERIENCE}
-          className={styles.select}
-          classNamePrefix="select"
-          placeholder="Experience"
-          isClearable={true}
-          onChange={(data) =>
-            setFilter({ ...filter, experience: data?.value || null })
-          }
-        />
-        <Select
-          closeMenuOnSelect={false}
-          components={animatedComponents}
-          isMulti
-          options={locations.map((location) => ({
-            label: location,
-            value: location,
-          }))}
-          className={styles.select}
-          classNamePrefix="select"
-          placeholder="Location"
-          onChange={(data) =>
-            setFilter({ ...filter, location: data.map((e) => e.value) })
-          }
-        />
-
-        <Select
-          closeMenuOnSelect={false}
-          components={animatedComponents}
-          isMulti
-          options={LOCATION}
-          className={styles.select}
-          classNamePrefix="select"
-          placeholder="Remote"
-          onChange={(data) =>
-            setFilter({ ...filter, locationType: data.map((e) => e.value) })
-          }
-        />
-
-        <Select
-          closeMenuOnSelect={false}
-          components={animatedComponents}
-          isMulti
-          options={ROLES}
-          className={styles.select}
-          isDisabled={true}
-          classNamePrefix="select"
-          placeholder="Tech Stack"
-        />
-        <Select
-          closeMenuOnSelect={false}
-          components={animatedComponents}
-          options={PAY}
-          className={styles.select}
-          classNamePrefix="select"
-          placeholder="Min Base Pay"
-          onChange={(data) => setFilter({ ...filter, minPay: data.value })}
-        />
-        <input
-          type="text"
-          placeholder="Company Name"
-          className={styles.input}
-          onChange={(e) => setFilter({ ...filter, name: e.target.value })}
-        />
+          <Select
+            inputId="locationType"
+            closeMenuOnSelect={false}
+            components={animatedComponents}
+            isMulti
+            options={LOCATION}
+            className={styles.select}
+            classNamePrefix="select"
+            placeholder="Remote"
+            onChange={(data) =>
+              setFilter({ ...filter, locationType: data.map((e) => e.value) })
+            }
+          />
+        </div>
+        <div className={styles.inputWarpper}>
+          <Select
+            closeMenuOnSelect={false}
+            components={animatedComponents}
+            isMulti
+            options={ROLES}
+            className={styles.select}
+            isDisabled={true}
+            classNamePrefix="select"
+            placeholder="Tech Stack"
+          />
+        </div>
+        <div className={styles.inputWarpper}>
+          {filter?.minPay && (
+            <label htmlFor="basepay" className={styles.label}>
+              Base Pay
+            </label>
+          )}
+          <Select
+            inputId="basepay"
+            closeMenuOnSelect={false}
+            components={animatedComponents}
+            options={PAY}
+            className={styles.select}
+            classNamePrefix="select"
+            placeholder="Min Base Pay"
+            onChange={(data) => setFilter({ ...filter, minPay: data.value })}
+          />
+        </div>
+        <div className={styles.inputWarpper}>
+          {filter?.name && (
+            <label htmlFor="companyName" className={styles.label}>
+              Company Name
+            </label>
+          )}
+          <input
+            id="companyName"
+            type="text"
+            placeholder="Company Name"
+            className={styles.input}
+            onChange={(e) => setFilter({ ...filter, name: e.target.value })}
+          />
+        </div>
       </div>
 
       <div className={styles.jobs}>
