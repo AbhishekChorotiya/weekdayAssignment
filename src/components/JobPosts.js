@@ -14,6 +14,7 @@ import { addJD, updateTotalCount } from "../redux/store";
 import { fetchJobs } from "../utils/apis/fetchJobs";
 import JobCard from "./JobCard";
 import { filterData } from "../utils/helpers";
+import JobCardSkeleton from "./JobCardSkeleton";
 const animatedComponents = makeAnimated();
 
 const JobPosts = () => {
@@ -35,6 +36,7 @@ const JobPosts = () => {
   };
 
   const jobsData = async () => {
+    setLoading(true);
     try {
       const data = await fetchJobs();
       if (!data) return;
@@ -44,6 +46,7 @@ const JobPosts = () => {
     } catch (e) {
       console.log(e);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -195,22 +198,28 @@ const JobPosts = () => {
       </div>
 
       <div className={styles.jobs}>
-        {tempJDList?.length > 0 ? (
-          tempJDList?.map((jd, i) => (
-            <JobCard
-              key={i}
-              name={jd?.companyName}
-              role={jd?.jobRole}
-              experience={jd?.minExp}
-              location={jd?.location}
-              details={jd?.jobDetailsFromCompany}
-              salary={jd?.minJdSalary}
-              logo={jd?.logoUrl}
-              jdLink={jd?.jdLink}
-            />
-          ))
-        ) : (
-          <p>No Jobs Found</p>
+        {tempJDList?.length > 0
+          ? tempJDList?.map((jd, i) => (
+              <JobCard
+                key={i}
+                name={jd?.companyName}
+                role={jd?.jobRole}
+                experience={jd?.minExp}
+                location={jd?.location}
+                details={jd?.jobDetailsFromCompany}
+                salary={jd?.minJdSalary}
+                logo={jd?.logoUrl}
+                jdLink={jd?.jdLink}
+              />
+            ))
+          : !loading && <p>No Jobs Found</p>}
+        {loading && (
+          <>
+            <JobCardSkeleton />
+            <JobCardSkeleton />
+            <JobCardSkeleton />
+            <JobCardSkeleton />
+          </>
         )}
       </div>
     </div>

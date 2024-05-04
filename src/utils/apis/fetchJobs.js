@@ -1,6 +1,8 @@
+import { delay } from "../helpers";
+
 var fetching = false;
 var page = 0;
-export const fetchJobs = async () => {
+export const fetchJobs = async (retry = 3) => {
   console.log(page);
   if (fetching) return;
   fetching = true;
@@ -27,6 +29,8 @@ export const fetchJobs = async () => {
     fetching = false;
     return data;
   } catch (e) {
+    await delay(500);
+    if (retry > 0) return fetchJobs(retry - 1);
     fetching = false;
     return null;
   }
