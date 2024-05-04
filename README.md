@@ -4,7 +4,7 @@
 
 This project is a UI for a candidate application platform built using ReactJS, Redux, and CSS. It allows users to view job listings, filter jobs based on various criteria, and implements infinite scroll for a seamless browsing experience.
 
-Live 🟢: https://weekday-assignment-blush.vercel.app/
+Live 🟢: [weekday-assignment-blush.vercel.app](https://weekday-assignment-blush.vercel.app/)
 
 ## What it does ⚙️
 
@@ -34,7 +34,7 @@ Live 🟢: https://weekday-assignment-blush.vercel.app/
 
 - Open your browser and visit
 
-  http://localhost:3000/
+  [http://localhost:3000/](http://localhost:3000/)
 
 ## Screenshots
 
@@ -58,13 +58,15 @@ Live 🟢: https://weekday-assignment-blush.vercel.app/
 
 ### Mobile View
 
-![Mobile Landing Page](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/mobileview.jpeg) ![Mobile Filters](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/mobile_filter.jpeg)
+| ![Mobile Landing Page](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/mobileview.jpeg) | ![Mobile Filters](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/mobile_filter.jpeg) |
+| :------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------: |
+|                                                 Mobile Landing Page                                                  |                                                   Mobile Filters                                                   |
 
 ### Live 📡
 
-Hosted App on vercel
+Hosted App on Vercel
 
-https://weekday-assignment-blush.vercel.app/
+[weekday-assignment-blush.vercel.app](https://weekday-assignment-blush.vercel.app/)
 
 ### Contact
 
