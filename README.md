@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+![Logo](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/weekday_cover.jpeg)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Weekday Frontend Assignment 🚀
 
-## Available Scripts
+This project is a UI for candidate application platform built using ReactJS, Redux and CSS. It allows users to view job listings, filter jobs based on various criteria, and implements infinite scroll for a seamless browsing experience.
 
-In the project directory, you can run:
+### What it does ⚙️
 
-### `npm start`
+- Shows job listings.
+- Lets you filter jobs by different things like experience, company, location, etc.
+- Automatically loads more jobs as you scroll down.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### How to run locally 🖥
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Clone the repository:
+  ```
+  git clone https://github.com/AbhishekChorotiya/weekdayAssignment.git
+  ```
+- Navigate into the project directory
+  ```
+  cd weekdayAssignment
+  ```
+- Install Dependencies
+  ```
+  npm i
+  ```
+- Start the Local Server
 
-### `npm test`
+  ```
+  npm start
+  ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Open your browser and visit
 
-### `npm run build`
+  http://localhost:3000/
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### SCREENSHOTS
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Desktop View
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Landing Page
+  ![App Screenshot](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/SC1.png)
 
-### `npm run eject`
+- Active Multiple Filters
+  ![App Screenshot](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/filters.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Expanded Card View
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![App Screenshot](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/expanded.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Skeleton Loader
+  ![App Screenshot](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/loader2.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Mobile View
 
-## Learn More
+![App Screenshot](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/mobileview.jpeg)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![App Screenshot](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/mobile_filter.jpeg)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Contact
 
-### Code Splitting
+- Email: 2020kuec2033@iiitkota.ac.in / code.abhi8678@gmail.com
+- Linkdin : https://www.linkedin.com/in/abhishek-chorotiya-7a1a0a222
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Happy coding! 🚀✨
