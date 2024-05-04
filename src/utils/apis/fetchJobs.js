@@ -2,8 +2,9 @@ import { delay } from "../helpers";
 
 var fetching = false;
 var page = 0;
+
+// Fetching Data from API with retry Logic
 export const fetchJobs = async (retry = 3) => {
-  console.log(page);
   if (fetching) return;
   fetching = true;
   try {

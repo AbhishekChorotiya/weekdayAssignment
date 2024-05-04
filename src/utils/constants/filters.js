@@ -1,3 +1,4 @@
+// Constants for filters
 export const ROLES = [
   {
     label: "ENGINEERING",
@@ -18,6 +19,14 @@ export const ROLES = [
         label: "Mobile",
         value: "mobile",
       },
+      {
+        label: "IOS",
+        value: "ios",
+      },
+      {
+        label: "Flutter",
+        value: "flutter",
+      },
     ],
   },
   {
@@ -35,6 +44,15 @@ export const ROLES = [
       {
         label: "Marketing",
         value: "marketing",
+      },
+    ],
+  },
+  {
+    label: "FINANCE",
+    options: [
+      {
+        label: "Finance",
+        value: "Finance",
       },
     ],
   },

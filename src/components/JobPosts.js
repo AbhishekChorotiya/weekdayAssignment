@@ -33,6 +33,7 @@ const JobPosts = () => {
     }
   };
 
+  // Fetching Data from API
   const jobsData = async () => {
     setLoading(true);
     try {
@@ -47,6 +48,8 @@ const JobPosts = () => {
     setLoading(false);
   };
 
+  //Adding Scroll Event Listener
+
   useEffect(() => {
     window.addEventListener("scroll", handleInfiniteScroll, {
       passive: true,
@@ -56,8 +59,9 @@ const JobPosts = () => {
 
   useEffect(() => {
     jobsData();
-    sessionStorage?.setItem("limitExceeded", false);
   }, []);
+
+  //Filtering Data based on filters
 
   useEffect(() => {
     const filteredData = filterData(filter, jdList);

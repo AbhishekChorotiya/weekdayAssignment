@@ -1,3 +1,5 @@
+//Redux sotre for Job Data
+
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
