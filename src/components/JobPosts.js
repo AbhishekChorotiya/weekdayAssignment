@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "./jobpost.module.css";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
@@ -20,12 +20,10 @@ const animatedComponents = makeAnimated();
 const JobPosts = () => {
   const dispatch = useDispatch();
   const jdList = useSelector((state) => state.jdList);
-  const totalCount = useSelector((state) => state.totalCount);
   const locations = useSelector((state) => state.locations);
   const [tempJDList, setTempJDList] = useState([]);
   const [filter, setFilter] = useState(DEFAULT_FILTER_STATE);
   const [loading, setLoading] = useState(false);
-
   const handleInfiniteScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop >=
@@ -41,8 +39,8 @@ const JobPosts = () => {
       const data = await fetchJobs();
       if (!data) return;
       dispatch(addJD(data?.jdList));
-      setTempJDList(data?.jdList);
       dispatch(updateTotalCount(data?.totalCount));
+      setTempJDList(data?.jdList);
     } catch (e) {
       console.log(e);
     }
@@ -54,10 +52,11 @@ const JobPosts = () => {
       passive: true,
     });
     return () => window.removeEventListener("scroll", handleInfiniteScroll);
-  }, [totalCount]);
+  }, []);
 
   useEffect(() => {
     jobsData();
+    sessionStorage?.setItem("limitExceeded", false);
   }, []);
 
   useEffect(() => {

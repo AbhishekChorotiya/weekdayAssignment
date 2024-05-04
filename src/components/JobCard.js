@@ -46,7 +46,7 @@ const JobCard = ({
         }}
       >
         <span>Estimated Salary:</span>
-        <span>{salary || "Undisclosed"}</span>
+        <span>{salary ? salary + "LPA" : "Undisclosed"}</span>
         <span>✅</span>
       </div>
       <div
