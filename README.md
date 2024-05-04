@@ -39,24 +39,32 @@ This project is a UI for a candidate application platform built using ReactJS, R
 ### Desktop View
 
 - Landing Page
+
   ![Desktop Landing Page](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/SC1.png)
 
 - Active Multiple Filters
+
   ![Active Filters](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/filters.png)
 
 - Expanded Card View
+
   ![Expanded Card View](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/expanded.png)
 
 - Skeleton Loader
+
   ![Skeleton Loader](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/loader2.png)
 
 ### Mobile View
 
-![Mobile Landing Page](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/mobileview.jpeg)
+![Mobile Landing Page](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/mobileview.jpeg) ![Mobile Filters](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/mobile_filter.jpeg)
 
-![Mobile Filters](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/mobile_filter.jpeg)
+### Live 📡
 
-## Contact
+Hosted App on vercel
+
+https://weekday-assignment-blush.vercel.app/
+
+### Contact
 
 - Email: 2020kuec2033@iiitkota.ac.in / code.abhi8678@gmail.com
 - LinkedIn: [Abhishek Chorotiya](https://www.linkedin.com/in/abhishek-chorotiya-7a1a0a222)
