@@ -70,6 +70,7 @@ Hosted App on Vercel
 
 ### Contact
 
+- Name: Abhishek Chorotiya
 - Email: 2020kuec2033@iiitkota.ac.in / code.abhi8678@gmail.com
 - LinkedIn: [Abhishek Chorotiya](https://www.linkedin.com/in/abhishek-chorotiya-7a1a0a222)
 
