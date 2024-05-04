@@ -1,16 +1,16 @@
-![Logo](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/weekday_cover.jpeg)
-
 # Weekday Frontend Assignment 🚀
 
-This project is a UI for candidate application platform built using ReactJS, Redux and CSS. It allows users to view job listings, filter jobs based on various criteria, and implements infinite scroll for a seamless browsing experience.
+![Weekday Logo](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/weekday_cover.jpeg)
 
-### What it does ⚙️
+This project is a UI for a candidate application platform built using ReactJS, Redux, and CSS. It allows users to view job listings, filter jobs based on various criteria, and implements infinite scroll for a seamless browsing experience.
+
+## What it does ⚙️
 
 - Shows job listings.
-- Lets you filter jobs by different things like experience, company, location, etc.
+- Lets you filter jobs by different criteria like experience, company, location, etc.
 - Automatically loads more jobs as you scroll down.
 
-### How to run locally 🖥
+## How to run locally 🖥
 
 - Clone the repository:
   ```
@@ -34,32 +34,31 @@ This project is a UI for candidate application platform built using ReactJS, Red
 
   http://localhost:3000/
 
-### SCREENSHOTS
+## Screenshots
 
-#### Desktop View
+### Desktop View
 
 - Landing Page
-  ![App Screenshot](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/SC1.png)
+  ![Desktop Landing Page](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/SC1.png)
 
 - Active Multiple Filters
-  ![App Screenshot](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/filters.png)
+  ![Active Filters](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/filters.png)
 
 - Expanded Card View
-
-![App Screenshot](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/expanded.png)
+  ![Expanded Card View](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/expanded.png)
 
 - Skeleton Loader
-  ![App Screenshot](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/loader2.png)
+  ![Skeleton Loader](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/loader2.png)
 
-#### Mobile View
+### Mobile View
 
-![App Screenshot](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/mobileview.jpeg)
+![Mobile Landing Page](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/mobileview.jpeg)
 
-![App Screenshot](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/mobile_filter.jpeg)
+![Mobile Filters](https://github.com/AbhishekChorotiya/weekdayAssignment/blob/main/screenshots/mobile_filter.jpeg)
 
-### Contact
+## Contact
 
 - Email: 2020kuec2033@iiitkota.ac.in / code.abhi8678@gmail.com
-- Linkdin : https://www.linkedin.com/in/abhishek-chorotiya-7a1a0a222
+- LinkedIn: [Abhishek Chorotiya](https://www.linkedin.com/in/abhishek-chorotiya-7a1a0a222)
 
 Happy coding! 🚀✨
